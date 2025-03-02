@@ -1,0 +1,10 @@
+.venv
+.venev
+
+__pycache__
+.idx
+.vscode
+.trae
+.fleet
+
+.DS_Store
