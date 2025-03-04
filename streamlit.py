@@ -1,7 +1,12 @@
 import streamlit as st
-from main import return_awaited_md, prompt_generator, llm_prompt_response
 
-st.title("AI Web Scraper")
+from scrapy import (
+    return_awaited_md,
+    prompt_generator,
+    llm_prompt_response
+)
+
+st.title("LLM based WebScraper")
 url = st.text_input("Enter Website URL")
 
 if st.button("Scrape Website"):
