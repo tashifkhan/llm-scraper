@@ -62,8 +62,6 @@ if scrape_button:
                     st.markdown(cleaned_content)
                 st.success("✅ Website scraped successfully!")
 
-                with st.expander("View Raw DOM Content"):
-                    st.text_area("", cleaned_content, height=300)
             except Exception as e:
                 st.error(f"Failed to scrape the website: {str(e)}")
     else:
