@@ -41,6 +41,12 @@ def prompt_generator(scrapped_content, prompt):
 
     """)
 
+
+def split_dom_content(dom_content, max_length=6000):
+    return [
+        dom_content[i : i + max_length] for i in range(0, len(dom_content), max_length)
+    ]
+
 def llm_prompt_response(prompt):
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
