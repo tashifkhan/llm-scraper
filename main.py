@@ -45,12 +45,15 @@ def llm_prompt_response(prompt):
     response = client.models.generate_content(
         model="gemini-2.0-flash", contents=prompt
     )
-    print(response.text)
+    return (response.text)
 
 def main():
-    # write_file("test2.md", return_md("https://portfolio.tashif.codes/"))
-    # write_file("test3.md", return_awaited_md("https://portfolio.tashif.codes/"))
-    llm_prompt_response("Hello what all can you do?")
+    scrapped_content = return_awaited_md("https://cropmate.tashif.codes/")
+    print(scrapped_content)
+    prompt = prompt_generator(scrapped_content, "what is this website all about?")
+    print(prompt)
+    response = llm_prompt_response(prompt)
+    print(response)
 
 if __name__ == "__main__":
     main()

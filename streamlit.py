@@ -1,5 +1,5 @@
 import streamlit as st
-from main import return_awaited_md
+from main import return_awaited_md, prompt_generator, llm_prompt_response
 
 st.title("AI Web Scraper")
 url = st.text_input("Enter Website URL")
@@ -24,7 +24,6 @@ if "dom_content" in st.session_state:
     if st.button("Parse Content"):
         if parse_description:
             st.write("Parsing the content...")
-
-            
-
-            st.write(parsed_result)
+            prompt = prompt_generator(cleaned_content, parse_description)
+            response = llm_prompt_response(prompt)
+            st.write(response)
