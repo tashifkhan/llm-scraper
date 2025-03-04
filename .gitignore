@@ -1,5 +1,6 @@
 .venv
 .venev
+.env
 
 __pycache__
 .idx
@@ -10,3 +11,6 @@ __pycache__
 .DS_Store
 
 subsidy.md
+test.md
+test2.md
+test3.md
