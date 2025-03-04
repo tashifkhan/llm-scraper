@@ -35,6 +35,7 @@ def prompt_generator(scrapped_content, prompt):
             "2. **No Extra Content:** Do not include any additional text, comments, or explanations in your response. "
             "3. **Empty Response:** If no information matches the description, return an empty string ('')."
             "4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text."
+            "5. **Markdown Format:** The Ouput must be a well formated markdown file"
 
         question: {prompt}
 
@@ -45,7 +46,7 @@ def llm_prompt_response(prompt):
     response = client.models.generate_content(
         model="gemini-2.0-flash", contents=prompt
     )
-    return (response.text)
+    return response.text
 
 def main():
     scrapped_content = return_awaited_md("https://cropmate.tashif.codes/")

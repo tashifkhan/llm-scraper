@@ -57,6 +57,9 @@ if scrape_button:
             try:
                 cleaned_content = return_awaited_md(url)
                 st.session_state.dom_content = cleaned_content
+
+                with st.expander("Preview Extracted Website Content"):
+                    st.markdown(cleaned_content)
                 st.success("✅ Website scraped successfully!")
 
                 with st.expander("View Raw DOM Content"):
