@@ -86,7 +86,7 @@ if "dom_content" in st.session_state:
                     response = llm_prompt_response(prompt)
 
                     st.markdown("<h2 class='subheader'>Results</h2>", unsafe_allow_html=True)
-                    st.markdown(response)
+                    st.markdown(response[11:-4])
 
                     st.download_button(
                         "📥 Download Results",
