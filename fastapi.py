@@ -1,0 +1,79 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import time
+from typing import Optional
+
+from scrapy import (
+    return_awaited_md,
+    prompt_generator,
+    llm_prompt_response
+)
+
+app = FastAPI(
+    title="LLM Web Scraper API",
+    description="API for scraping websites and extracting information using LLM",
+    version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
+class ScraperRequest(BaseModel):
+    url: str
+    prompt: str
+    timeout: Optional[int] = 300
+
+class ScraperResponse(BaseModel):
+    success: bool
+    data: Optional[str] = None
+    error: Optional[str] = None
+    execution_time: float
+
+@app.post("/scrape", response_model=ScraperResponse)
+async def scrape_website(request: ScraperRequest):
+    """
+    Scrape a website and extract information based on the provided prompt.
+
+    - **url**: URL of the website to scrape
+    - **prompt**: Description of what information to extract
+    - **timeout**: Maximum time to wait for processing in seconds (default: 300)
+    """
+    start_time = time.time()
+
+    try:
+        dom_content = return_awaited_md(request.url)
+
+        full_prompt = prompt_generator(dom_content, request.prompt)
+        response = llm_prompt_response(full_prompt)
+
+        execution_time = time.time() - start_time
+
+        return ScraperResponse(
+            success=True,
+            data=response,
+            execution_time=execution_time
+        )
+
+    except Exception as e:
+        execution_time = time.time() - start_time
+
+        return ScraperResponse(
+            success=False,
+            error=str(e),
+            execution_time=execution_time
+        )
+
+@app.get("/check")
+async def check():
+    """Simple check endpoint for the fastapi"""
+    return {"status": "working", "timestamp": time.time()}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
