@@ -62,6 +62,34 @@ def main():
     response = llm_prompt_response(prompt)
     print(response)
 
+def local_modals(dom_chunks, parse_description):
+    from langchain_ollama import OllamaLLM
+    from langchain_core.prompts import ChatPromptTemplate
+
+    model =  OllamaLLM(model="mistral")
+
+    templet = (
+        "You are tasked with extracting specific information from the following text content: {dom_content}. "
+        "Please follow these instructions carefully: \n\n"
+        "1. **Extract Information:** Only extract the information that directly matches the provided scarpped content. "
+        "2. **No Extra Content:** Do not include any additional text, comments, or explanations in your response. "
+        "3. **Empty Response:** If no information matches the description, return an empty string ('')."
+        "4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text."
+        "5. **Markdown Format:** The Ouput must be a well formated markdown file"
+    )
+
+    prompt = ChatPromptTemplate.from_template(templet)
+    chain = prompt | model
+    parsed_results = []
+
+    for i, chunk in enumerate(dom_chunks, start=1):
+        response = chain.invoke(
+            {"dom_content": chunk, "parse_description": parse_description}
+        )
+        print(f"Parsed batch: {i} of {len(dom_chunks)}")
+        parsed_results.append(response)
+
+    return "\n".join(parsed_results)
+
 if __name__ == "__main__":
     main()
-
