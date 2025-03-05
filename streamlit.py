@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 from scrapy import (
     return_awaited_md,
@@ -6,6 +7,7 @@ from scrapy import (
     llm_prompt_response
 )
 
+# Custom CSS for styling
 st.markdown("""
 <style>
     .main-header {
@@ -32,70 +34,181 @@ st.markdown("""
     .stTextInput > div > div > input {
         border-radius: 8px;
     }
+    .nav-item {
+        padding: 0.5rem 1rem;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+    .nav-active {
+        background-color: #6200EA;
+        color: white;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 class='main-header'>LLM based Web Scraper</h1>", unsafe_allow_html=True)
+# Initialize session state for page navigation
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = "Web Scraper"
 
-st.markdown("""
-This tool helps you scrape and analyze web content using AI. Simply enter a URL,
-describe what you're looking for, and get structured results!
-""")
+# App header with custom styling
+st.markdown("<h1 class='main-header'>LLM-powered Assistant</h1>", unsafe_allow_html=True)
 
-
-st.markdown("<h2 class='subheader'>Step 1: Enter Website URL</h2>", unsafe_allow_html=True)
-col1, col2 = st.columns([3, 1])
+# Navigation bar
+col1, col2 = st.columns([1, 1])
 with col1:
-    url = st.text_input("Website URL", placeholder="https://example.com")
+    if st.button("Web Scraper", use_container_width=True, 
+                 key="btn_scraper", 
+                 type="primary" if st.session_state.current_page == "Web Scraper" else "secondary"):
+        st.session_state.current_page = "Web Scraper"
+        st.rerun()
 with col2:
-    scrape_button = st.button("🔍 Scrape", use_container_width=True)
+    if st.button("Subsidy Enquiries", use_container_width=True, 
+                 key="btn_subsidy", 
+                 type="primary" if st.session_state.current_page == "Subsidy Enquiries" else "secondary"):
+        st.session_state.current_page = "Subsidy Enquiries"
+        st.rerun()
 
+st.divider()
 
-if scrape_button:
-    if url:
-        with st.spinner("🕸️ Scraping website content..."):
-            try:
-                cleaned_content = return_awaited_md(url)
-                st.session_state.dom_content = cleaned_content
+# Web Scraper Page
+if st.session_state.current_page == "Web Scraper":
+    st.markdown("<h2 class='subheader'>Web Scraper</h2>", unsafe_allow_html=True)
+    
+    st.markdown("""
+    This tool helps you scrape and analyze web content using AI. Simply enter a URL,
+    describe what you're looking for, and get structured results!
+    """)
 
-                with st.expander("Preview Extracted Website Content"):
-                    st.markdown(cleaned_content)
-                st.success("✅ Website scraped successfully!")
+    st.markdown("<h3 class='subheader'>Step 1: Enter Website URL</h3>", unsafe_allow_html=True)
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        url = st.text_input("Website URL", placeholder="https://example.com", key="scraper_url")
+    with col2:
+        scrape_button = st.button("🔍 Scrape", use_container_width=True, key="btn_scrape_site")
 
-            except Exception as e:
-                st.error(f"Failed to scrape the website: {str(e)}")
-    else:
-        st.warning("⚠️ Please enter a valid URL")
-
-
-if "dom_content" in st.session_state:
-    st.markdown("<h2 class='subheader'>Step 2: Extract Information</h2>", unsafe_allow_html=True)
-    st.markdown("Describe what information you want to extract from the website:")
-
-    parse_description = st.text_area(
-        "Extraction instructions",
-        placeholder="Example: Extract all product names and prices from this e-commerce page",
-        height=100
-    )
-
-    if st.button("Extract Information", use_container_width=True):
-        if parse_description:
-            with st.spinner("analyzing the content..."):
+    if scrape_button:
+        if url:
+            with st.spinner("🕸️ Scraping website content..."):
                 try:
-                    prompt = prompt_generator(st.session_state.dom_content, parse_description)
-                    response = llm_prompt_response(prompt)
+                    cleaned_content = return_awaited_md(url)
+                    st.session_state.dom_content = cleaned_content
 
-                    st.markdown("<h2 class='subheader'>Results</h2>", unsafe_allow_html=True)
-                    st.markdown(response[11:-4])
+                    with st.expander("Preview Extracted Website Content"):
+                        st.markdown(cleaned_content)
+                    st.success("✅ Website scraped successfully!")
 
-                    st.download_button(
-                        "📥 Download Results",
-                        response,
-                        file_name="extraction_results.md",
-                        mime="text/plain"
-                    )
                 except Exception as e:
-                    st.error(f"Error during content extraction: {str(e)}")
+                    st.error(f"Failed to scrape the website: {str(e)}")
         else:
-            st.warning("⚠️ Please describe what information you want to extract")
+            st.warning("⚠️ Please enter a valid URL")
+
+    if "dom_content" in st.session_state:
+        st.markdown("<h3 class='subheader'>Step 2: Extract Information</h3>", unsafe_allow_html=True)
+        st.markdown("Describe what information you want to extract from the website:")
+
+        parse_description = st.text_area(
+            "Extraction instructions",
+            placeholder="Example: Extract all product names and prices from this e-commerce page",
+            height=100,
+            key="scraper_instructions"
+        )
+
+        if st.button("Extract Information", use_container_width=True, key="btn_extract"):
+            if parse_description:
+                with st.spinner("analyzing the content..."):
+                    try:
+                        prompt = prompt_generator(st.session_state.dom_content, parse_description)
+                        response = llm_prompt_response(prompt)
+
+                        st.markdown("<h3 class='subheader'>Results</h3>", unsafe_allow_html=True)
+                        st.markdown(response[11:-4] if response.startswith("```markdown") and response.endswith("```") else response)
+
+                        st.download_button(
+                            "📥 Download Results",
+                            response,
+                            file_name="extraction_results.md",
+                            mime="text/plain",
+                            key="download_scraper_results"
+                        )
+                    except Exception as e:
+                        st.error(f"Error during content extraction: {str(e)}")
+            else:
+                st.warning("⚠️ Please describe what information you want to extract")
+
+# Subsidy Enquiries Page
+elif st.session_state.current_page == "Subsidy Enquiries":
+    st.markdown("<h2 class='subheader'>Solar Subsidy Enquiries</h2>", unsafe_allow_html=True)
+    
+    st.markdown("""
+    Ask questions about solar subsidies and get accurate information based on 
+    our comprehensive subsidy database. Find out if you qualify, how much you can save, 
+    and the process to apply.
+    """)
+    
+    # Function to read subsidy information file
+    def read_subsidy_info():
+        subsidy_file_path = os.path.join(os.path.dirname(__file__), "subsidy_info.md")
+        try:
+            with open(subsidy_file_path, "r") as file:
+                return file.read()
+        except FileNotFoundError:
+            st.error("Subsidy information file not found. Please create a 'subsidy_info.md' file.")
+            return None
+        except Exception as e:
+            st.error(f"Error reading subsidy information: {str(e)}")
+            return None
+
+    # Get subsidy information when page loads
+    if 'subsidy_info' not in st.session_state:
+        subsidy_info = read_subsidy_info()
+        if subsidy_info:
+            st.session_state.subsidy_info = subsidy_info
+    
+    # Display subsidy info file contents in expander
+    if 'subsidy_info' in st.session_state:
+        with st.expander("View Subsidy Information Database"):
+            st.markdown(st.session_state.subsidy_info)
+    
+    # Query input
+    st.markdown("<h3 class='subheader'>Ask a Question</h3>", unsafe_allow_html=True)
+    query = st.text_area(
+        "Your Subsidy Question",
+        placeholder="Example: What will it cost me to get a rooftop installation in Mumbai?",
+        height=100,
+        key="subsidy_query"
+    )
+    
+    col1, col2 = st.columns([3, 1])
+    with col2:
+        if st.button("🔍 Get Answer", use_container_width=True, key="btn_subsidy_query"):
+            if query and 'subsidy_info' in st.session_state:
+                with st.spinner("Analyzing your question..."):
+                    try:
+                        prompt = prompt_generator(st.session_state.subsidy_info, query)
+                        response = llm_prompt_response(prompt)
+                        
+                        st.markdown("<h3 class='subheader'>Results</h3>", unsafe_allow_html=True)
+                        
+                        # Clean up response formatting if needed
+                        clean_response = response
+                        if response.startswith("```markdown") and response.endswith("```"):
+                            clean_response = response[11:-4]
+                        
+                        st.markdown(clean_response)
+                        
+                        st.download_button(
+                            "📥 Download Results",
+                            response,
+                            file_name="subsidy_results.md",
+                            mime="text/plain",
+                            key="download_subsidy_results"
+                        )
+                    except Exception as e:
+                        st.error(f"Error processing your question: {str(e)}")
+            else:
+                if 'subsidy_info' not in st.session_state:
+                    st.warning("⚠️ Subsidy information is not available. Please check the subsidy_info.md file.")
+                else:
+                    st.warning("⚠️ Please enter a question about subsidies.")
 
