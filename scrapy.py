@@ -35,12 +35,13 @@ def prompt_generator(scrapped_content, prompt):
             "2. **No Extra Content:** Do not include any additional text, comments, or explanations in your response. "
             "3. **Empty Response:** If no information matches the description, return an empty string ('')."
             "4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text."
-            "5. **Markdown Format:** The Ouput must be a well formated markdown file"
+            "5. **Markdown Format:** Format your response in well-structured markdown without using code blocks."
+            "6. **Rendering:** Ensure tables and lists are properly formatted for rendering in markdown."
+            "7. **Summary**: Provide a summary of the extracted information in the response."
 
         question: {prompt}
 
     """)
-
 
 def split_dom_content(dom_content, max_length=6000):
     return [
