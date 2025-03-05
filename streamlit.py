@@ -66,30 +66,11 @@ def clean_markdown_response(response):
     
     return response
 
-# Initialize session state
 if 'current_page' not in st.session_state:
     st.session_state.current_page = "Web Scraper"
 
 st.markdown("<h1 class='main-header'>LLM-powered Assistant</h1>", unsafe_allow_html=True)
 
-# Navigation bar
-col1, col2 = st.columns([1, 1])
-with col1:
-    if st.button("Web Scraper", use_container_width=True,
-                 key="btn_scraper",
-                 type="primary" if st.session_state.current_page == "Web Scraper" else "secondary"):
-        st.session_state.current_page = "Web Scraper"
-        st.rerun()
-with col2:
-    if st.button("Subsidy Enquiries", use_container_width=True,
-                 key="btn_subsidy",
-                 type="primary" if st.session_state.current_page == "Subsidy Enquiries" else "secondary"):
-        st.session_state.current_page = "Subsidy Enquiries"
-        st.rerun()
-
-st.divider()
-
-# Web Scraper Page
 if st.session_state.current_page == "Web Scraper":
     st.markdown("<h2 class='subheader'>Web Scraper</h2>", unsafe_allow_html=True)
 
@@ -159,75 +140,3 @@ if st.session_state.current_page == "Web Scraper":
                         st.error(f"Error during content extraction: {str(e)}")
             else:
                 st.warning("⚠️ Please describe what information you want to extract")
-
-# Subsidy Enquiries Page
-elif st.session_state.current_page == "Subsidy Enquiries":
-    st.markdown("<h2 class='subheader'>Solar Subsidy Enquiries</h2>", unsafe_allow_html=True)
-
-    st.markdown("""
-    Ask questions about solar subsidies and get accurate information based on
-    our comprehensive subsidy database. Find out if you qualify, how much you can save,
-    and the process to apply.
-    """)
-
-    def read_subsidy_info():
-        subsidy_file_path = os.path.join(os.path.dirname(__file__), "subsidy_info.md")
-        try:
-            with open(subsidy_file_path, "r") as file:
-                return file.read()
-        except FileNotFoundError:
-            st.error("Subsidy information file not found. Please create a 'subsidy_info.md' file.")
-            return None
-        except Exception as e:
-            st.error(f"Error reading subsidy information: {str(e)}")
-            return None
-
-    if 'subsidy_info' not in st.session_state:
-        subsidy_info = read_subsidy_info()
-        if subsidy_info:
-            st.session_state.subsidy_info = subsidy_info
-
-    if 'subsidy_info' in st.session_state:
-        with st.expander("View Subsidy Information Database"):
-            st.markdown(st.session_state.subsidy_info)
-
-    st.markdown("<h3 class='subheader'>Ask a Question</h3>", unsafe_allow_html=True)
-    query = st.text_area(
-        "Your Subsidy Question",
-        placeholder="Example: What will it cost me to get a rooftop installation in Mumbai?",
-        height=100,
-        key="subsidy_query"
-    )
-
-    if st.button("🔍 Get Answer", use_container_width=True, key="btn_subsidy_query"):
-        if query and 'subsidy_info' in st.session_state:
-            with st.spinner("Analyzing your question..."):
-                try:
-                    prompt = prompt_generator(st.session_state.subsidy_info, query)
-                    response = llm_prompt_response(prompt)
-
-                    cleaned_response = clean_markdown_response(response)
-                    
-                    st.markdown("<h3 class='subheader'>Results</h3>", unsafe_allow_html=True)
-                    
-                    with st.container():
-                        st.divider()
-                        st.markdown(cleaned_response)
-                        st.divider()
-                    
-                    # Download button
-                    st.download_button(
-                        "Download Results",
-                        cleaned_response,
-                        file_name="subsidy_results.md",
-                        mime="text/plain",
-                        key="download_subsidy_results"
-                    )
-                except Exception as e:
-                    st.error(f"Error processing your question: {str(e)}")
-        else:
-            if 'subsidy_info' not in st.session_state:
-                st.warning("⚠️ Subsidy information is not available. Please check the subsidy_info.md file.")
-            else:
-                st.warning("⚠️ Please enter a question about subsidies.")
-
