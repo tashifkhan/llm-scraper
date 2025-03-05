@@ -1,8 +1,10 @@
+from idlelib.rpc import response_queue
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import time
 from typing import Optional
+import time
 
 from scrapy import (
     return_awaited_md,
@@ -60,6 +62,43 @@ async def scrape_website(request: ScraperRequest):
             execution_time=execution_time
         )
 
+    except Exception as e:
+        execution_time = time.time() - start_time
+
+        return ScraperResponse(
+            success=False,
+            error=str(e),
+            execution_time=execution_time
+        )
+
+
+@app.post("/subsidy-enquiry", response_modal = ScraperResponse)
+def subsidy_enquiry(queary: str):
+    """
+    Process a subsidy enquiry request.
+
+    This endpoint accepts a query string, reads subsidy information from a markdown file,
+    generates a prompt using the query and subsidy context, and returns a response from an LLM.
+
+    - **url**: URL of the website to scrape
+    - **prompt**: Description of what information to extract
+    - **timeout**: Maximum time to wait for processing in seconds (default: 300)
+    """
+    start_time = time.time()
+    try:
+        with open("subsidy_info.md", "r") as ft:
+            subsidy_context = ft.read()
+            ft.close()
+
+        prompt = prompt_generator(subsidy_context, queary)
+        response = llm_prompt_response(prompt)
+        execution_time = time.time() - start_time
+
+        return ScraperResponse(
+                success=True,
+                data=response,
+                execution_time=execution_time
+        )
     except Exception as e:
         execution_time = time.time() - start_time
 

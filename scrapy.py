@@ -55,9 +55,12 @@ def llm_prompt_response(prompt):
     return response.text
 
 def main():
-    scrapped_content = return_awaited_md("https://cropmate.tashif.codes/")
-    print(scrapped_content)
-    prompt = prompt_generator(scrapped_content, "what is this website all about?")
+    with open("subsidy_info.md", "r") as ft:
+        subsidy_context = ft.read()
+        # print(subsidy_context)
+        ft.close()
+    print(subsidy_context)
+    prompt = prompt_generator(subsidy_context, "what will it cost me to get a rooftop installation in mumbai?")
     print(prompt)
     response = llm_prompt_response(prompt)
     print(response)
