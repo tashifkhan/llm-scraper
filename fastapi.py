@@ -1,5 +1,3 @@
-from idlelib.rpc import response_queue
-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -29,6 +27,10 @@ app.add_middleware(
 class ScraperRequest(BaseModel):
     url: str
     prompt: str
+    timeout: Optional[int] = 300
+
+class SubsidyQuery(BaseModel):
+    query: str
     timeout: Optional[int] = 300
 
 class ScraperResponse(BaseModel):
@@ -72,16 +74,15 @@ async def scrape_website(request: ScraperRequest):
         )
 
 
-@app.post("/subsidy-enquiry", response_modal = ScraperResponse)
-def subsidy_enquiry(queary: str):
+@app.post("/subsidy-enquiry", response_model=ScraperResponse)
+async def subsidy_enquiry(request: SubsidyQuery):
     """
     Process a subsidy enquiry request.
 
     This endpoint accepts a query string, reads subsidy information from a markdown file,
     generates a prompt using the query and subsidy context, and returns a response from an LLM.
 
-    - **url**: URL of the website to scrape
-    - **prompt**: Description of what information to extract
+    - **query**: Question about solar subsidies
     - **timeout**: Maximum time to wait for processing in seconds (default: 300)
     """
     start_time = time.time()
@@ -90,7 +91,7 @@ def subsidy_enquiry(queary: str):
             subsidy_context = ft.read()
             ft.close()
 
-        prompt = prompt_generator(subsidy_context, queary)
+        prompt = prompt_generator(subsidy_context, request.query)
         response = llm_prompt_response(prompt)
         execution_time = time.time() - start_time
 
@@ -115,4 +116,4 @@ async def check():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("fastapi:app", host="0.0.0.0", port=8000, reload=True)
