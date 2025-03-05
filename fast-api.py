@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 from typing import Optional
 import time
@@ -108,6 +109,11 @@ async def subsidy_enquiry(request: SubsidyQuery):
             error=str(e),
             execution_time=execution_time
         )
+
+@app.get("/")
+async def root():
+    """Redirect root to documentation page"""
+    return RedirectResponse(url="/docs")
 
 @app.get("/check")
 async def check():
