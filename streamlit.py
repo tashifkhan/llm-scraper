@@ -1,6 +1,4 @@
 import streamlit as st
-import os
-import re
 
 from scrapy import (
     return_awaited_md,
@@ -69,7 +67,7 @@ def clean_markdown_response(response):
 if 'current_page' not in st.session_state:
     st.session_state.current_page = "Web Scraper"
 
-st.markdown("<h1 class='main-header'>LLM-powered Assistant</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-header'>LLM based WebScapper</h1>", unsafe_allow_html=True)
 
 if st.session_state.current_page == "Web Scraper":
     st.markdown("<h2 class='subheader'>Web Scraper</h2>", unsafe_allow_html=True)
