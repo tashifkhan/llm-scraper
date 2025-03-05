@@ -5,11 +5,12 @@ The following table provides a detailed breakdown of solar subsidies available f
 ---
 
 ## Central Subsidy Framework (PM Surya Ghar Muft Bijli Yojana)
-| System Capacity | Subsidy Amount (₹) | % of System Cost Covered |
-|------------------|---------------------|---------------------------|
-| Up to 2 kW       | ₹30,000/kW          | 60%                       |
-| 3 kW             | ₹78,000 fixed       | 40%                       |
-| Above 3 kW       | ₹78,000 fixed       | -                         |
+
+| System Capacity | Standard States/UTs Subsidy | Special Category States/UTs Subsidy* | % of System Cost |
+|-----------------|------------------------------|--------------------------------------|------------------|
+| Up to 2 kW      | ₹30,000/kW                  | ₹20,000/kW                           | 60%              |
+| 3 kW            | ₹78,000 fixed               | ₹90,000 fixed                        | 40% (incremental)|
+| Above 3 kW      | ₹78,000 fixed               | Up to ₹1,30,000                      | Varies           |
 
 ### National Subsidy Framework (PM Surya Ghar Muft Bijli Yojana)
 The central government provides
@@ -24,26 +25,46 @@ The central government provides
 
 ## State-Wise Solar Subsidies
 
-| State/UT                | Central Subsidy (₹)   | State Subsidy (₹)         | Combined Benefit (₹)      | Eligible Capacity (kW)   | Notes/Requirements                      |
-|--------------------------|-----------------------|---------------------------|---------------------------|--------------------------|-----------------------------------------|
-| **Andhra Pradesh**       | Up to ₹78,000        | None                      | Up to ₹78,000            | ≤3 kW                   | Apply through DISCOM portal             |
-| **Arunachal Pradesh**    | Up to ₹1,30,000      | None                      | Up to ₹1,30,000          | ≤10 kW                  | Special category state                  |
-| **Assam**                | Up to ₹1,30,000      | None                      | Up to ₹1,30,000          | ≤10 kW                  | Special category state                  |
-| **Bihar**                | Up to ₹78,000        | None                      | Up to ₹78,000            | ≤3 kW                   | Apply through BREDA                     |
-| **Chhattisgarh**         | Up to ₹78,000        | None                      | Up to ₹78,000            | ≤3 kW                   | No additional state subsidy             |
-| **Goa**                  | Up to ₹78,000        | None                      | Up to ₹78,000            | ≤3 kW                   | No additional state subsidy             |
-| **Gujarat**              | Up to ₹78,000        | ₹12,000/kW               | ₹1.14L (for 3kW system)  | ≤10 kW                  | GEDA-approved vendors only              |
-| **Haryana**              | Up to ₹78,000        | ₹10,000/kW               | ₹1.08L (for 3kW system)  | ≤10 kW                  | HAREDA certification required           |
-| **Himachal Pradesh**     | Up to ₹1,30,000      | None                      | Up to ₹1,30,000          | ≤10 kW                  | Special category state                  |
-| **Jharkhand**            | Up to ₹78,000        | None                      | Up to ₹78,000            | ≤3 kW                   | No additional state subsidy             |
-| **Karnataka**            | Up to ₹78,000        | ₹15,000/kW               | ₹1.23L (for 3kW system)  | ≤5 kW                   | Bescom net metering approval required   |
-| **Kerala**               | Up to ₹78,000        | ₹20,000/kW               | ₹1.38L (for 3kW system)  | ≤4 kW                   | ANERT portal registration required      |
-| **Madhya Pradesh**       | Up to ₹78,000        | 20% of project cost       | ~₹1.17L (for 3kW system)  | ≤5 kW                   | MPPMCL certification required           |
-| **Maharashtra**          | Up to ₹78,000        | 20% of project cost       | ~₹1.2L (for 3kW system)   | ≤10 kW                   | MEDA-approved vendors only               |
-| **Manipur**              | Up to ₹1,30,000      | None                       | ~₹1.3L                    | ≤10 kW                   | Special category state                   |
-| **Meghalaya**            | Up to ₹1,30,000      | None                       | ~₹1.3L                    | ≤10 kW                   | Special category state                   |
-| **Mizoram**              | Up to ₹1,30,000      | None                       | ~₹1.3L                    | ≤10 kW                   | Special category state                   |
 
+| State/UT                       | Central Subsidy (₹)   | State Subsidy (₹)                      | Combined Benefit (₹)      | Eligible Capacity (kW)   | Notes/Requirements                                  |
+|--------------------------------|-----------------------|----------------------------------------|---------------------------|--------------------------|-----------------------------------------------------|
+| **Andhra Pradesh**             | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | Apply through APEPDCL/APSPDCL portal[2][6]         |
+| **Arunachal Pradesh**          | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Assam**                      | Up to ₹1,30,000      | ₹10,000/kW (Residential)              | ~₹1.6L (3kW system)      | ≤10 kW                  | Apply through APDCL; special category state[2]      |
+| **Bihar**                      | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | Apply through BREDA portal[6]                       |
+| **Chhattisgarh**               | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | No additional state subsidy[6]                      |
+| **Goa**                        | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | No additional state subsidy[6]                      |
+| **Gujarat**                    | Up to ₹78,000        | ₹12,000/kW                            | ~₹1.14L (3kW system)     | ≤10 kW                  | GEDA-approved vendors only; 69 MW installed[1][2]   |
+| **Haryana**                    | Up to ₹78,000        | ₹10,000/kW                            | ~₹1.08L (3kW system)     | ≤10 kW                  | HAREDA certification required; 57 MW installed[1]   |
+| **Himachal Pradesh**           | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Jharkhand**                  | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | No additional state subsidy[6]                      |
+| **Karnataka**                  | Up to ₹78,000        | ₹15,000/kW                            | ~₹1.23L (3kW system)     | ≤5 kW                   | Bescom net metering approval required[2]            |
+| **Kerala**                     | Up to ₹78,000        | ₹20,000/kW                            | ~₹1.38L (3kW system)     | ≤4 kW                   | ANERT portal registration required[2]               |
+| **Madhya Pradesh**             | Up to ₹78,000        | 20% of project cost                    | ~₹1.17L (3kW system)     | ≤5 kW                   | MPPMCL certification required[2][6]                 |
+| **Maharashtra**                | Up to ₹78,000        | 20% of project cost                    | ~₹1.2L (3kW system)      | ≤10 kW                  | MEDA-approved vendors only; 89 MW installed[1][2]   |
+| **Manipur**                    | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Meghalaya**                  | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Mizoram**                    | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Nagaland**                   | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Odisha**                     | Up to ₹78,000        | ₹7,500/kW                             | ~₹1L (3kW system)        | ≤4 kW                   | OREDA certification required[2]                     |
+| **Punjab**                     | Up to ₹78,000        | 15% of project cost                    | ~₹1.02L (3kW system)     | ≤5 kW                   | PEDA registration required; 55 MW installed[1][2]   |
+| **Rajasthan**                  | Up to ₹78,000        | 25% of system cost                     | ~₹1.3L (3kW system)      | ≤10 kW                  | RRECL approval needed[2][7]                         |
+| **Sikkim**                     | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Tamil Nadu**                 | Up to ₹78,000        | 30% state match                        | ~₹1.35L (3kW system)     | ≤3 kW                   | TEDA portal registration; 132 MW installed[1][2]    |
+| **Telangana**                  | Up to ₹78,000        | ₹5,000/kW                             | ~₹93,000 (3kW system)    | ≤3 kW                   | TSREDCO empanelment required[2][7]                 |
+| **Tripura**                    | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **Uttar Pradesh**              | Up to ₹78,000        | 30% state funding                      | ~₹1.55L (3kW system)     | ≤5 kW                   | UPNEDA portal submission required[2]               |
+| **Uttarakhand**                | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category state benefits[5][6]               |
+| **West Bengal**                | Up to ₹78,000        | ₹10,000 fixed                         | ~₹88,000 (3kW system)    | ≤3 kW                   | WBSEDCL certification required[2]                   |
+| **Andaman & Nicobar Islands**  | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category UT benefits[5][6]                  |
+| **Chandigarh**                 | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | No additional UT subsidy[6]                         |
+| **Dadra & Nagar Haveli**       | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | No additional UT subsidy[6]                         |
+| **Daman & Diu**                | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | No additional UT subsidy[6]                         |
+| **Delhi**                      | Up to ₹78,000        | ₹2,000/kW (Generation-based incentive)| ~₹84,000 (3kW system)    | ≤3 kW                   | BRPL/BYPL/TPDDL registration required[2]           |
+| **Jammu & Kashmir**            | Up to ₹1,30,000      | ₹15,000/kW                            | ~₹1.75L (3kW system)     | ≤10 kW                  | Apply through J&K Energy Dev. Agency[2][5]         |
+| **Ladakh**                     | Up to ₹1,30,000      | ₹20,000/kW (first 2kW); ₹10,000/kW (for next 1kW) | ~₹1.8L (3kW system) | ≤3 kW                | Official top-up subsidy approved June 2024[3]      |
+| **Lakshadweep**                | Up to ₹1,30,000      | None                                   | Up to ₹1,30,000          | ≤10 kW                  | Special category UT benefits[5][6]                  |
+| **Puducherry**                 | Up to ₹78,000        | None                                   | Up to ₹78,000            | ≤3 kW                   | No additional UT subsidy[6]                         |
 
 ---
 
@@ -181,13 +202,23 @@ _This analysis synthesizes data from MNRE guidelines[6], state DISCOM portals[3]
 ***
 
 Citations:
-[1] https://loopsolar.com/rooftop-solar-subsidy-scheme-india.html
-[2] https://blog.solarclue.com/blog/everything-you-need-to-know-about-the-solar-panel-subsidy-in-india-2025/
-[3] https://cleartax.in/s/rooftop-solar-scheme
-[4] https://pmgovtschemehub.com/solar-rooftop-yojana/
-[5] https://www.truzonsolar.com/blogs/solar-panel-government-subsidy-to-avail-in-india-2025
-[6] https://mnre.gov.in/en/grid-connected-solar-rooftop-programme/
-[7] https://freyrenergy.com/guide-to-solar-panel-subsidy-in-india-2024/
-[8] https://www.citizensolar.com/subsidy-on-solar-panel/
-[9] https://pmsuryaghar.gov.in
-[10] https://mnre.gov.in/en/policies-and-regulations/schemes-and-guidelines/schemes/
+[1] https://www.itsmysun.com/solar-state-wise-policy/
+[2] https://ornatesolar.com/blog/state-wise-solar-subsidies-in-india-2021
+[3] https://ladakh.gov.in/ut-administration-approves-top-up-subsidy-on-the-pm-surya-ghar-muft-bijli-yojana-2/
+[4] https://www.truzonsolar.com/blogs/solar-panel-government-subsidy-to-avail-in-india-2025
+[5] https://www.pv-magazine.com/2024/03/01/india-government-approves-9-billion-rebate-scheme-for-residential-pv/
+[6] https://www.india.gov.in/spotlight/pm-surya-ghar-muft-bijli-yojana
+[7] https://blog.solarclue.com/blog/indias-top-6-states-leading-the-solar-power-revolution-in-2025/
+[8] https://www.goodnewsnetwork.org/india-approves-massive-9-bil-rooftop-solar-plan-with-panels-for-10-million-homes/
+[9] https://cdnbbsr.s3waas.gov.in/s3716e1b8c6cd17b771da77391355749f3/uploads/2024/07/202407021768035484.pdf
+[10] https://freyrenergy.com/guide-to-solar-panel-subsidy-in-india-2024/
+[11] https://pib.gov.in/PressReleaseIframePage.aspx?PRID=2081250
+[12] https://upnedasolarrooftopportal.com/1st_Aug_2024_PM_Surya_Ghar_Muft_Bijli_Yojana_Information.pdf
+[13] https://pmsuryaghar.gov.in
+[14] https://amplussolar.com/blog/solar-panel-system-price-subsidy-in-delhi/
+[15] https://www.myscheme.gov.in/schemes/pmsgmb
+[16] https://mnre.gov.in/en/policies-and-regulations/schemes-and-guidelines/schemes/
+[17] https://www.truzonsolar.com/solar-panel-subsidy-in-india.php
+[18] https://srtpv.bescom.org/SRTPV/document/PM%20Surya%20Ghar%20Muft%20Bijli%20Yojna.pdf
+[19] https://www.sungarner.com/blogs/home/details/top-solar-panel-government-subsidy-schemes-in-india-for-homeowners-and-businesses
+[20] https://www.loomsolar.com/blogs/collections/solar-panel-subsidy-in-india
